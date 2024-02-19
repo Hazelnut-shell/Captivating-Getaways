@@ -7,7 +7,8 @@ import Backdrop from "./Backdrop";
 const ModalOverlay = (props) => {
   const content = (
     <div
-      className={`fixed left-[10%] top-[22vh] z-[100] w-4/5 rounded-lg bg-white shadow-[0_2px_8px_rgba(0,0,0,0.26)] md:w-[40rem] md:left-[calc(50% - 20rem)] ${props.className}`}
+      className={`fixed left-[10%] top-[22vh] z-[100] w-4/5 rounded-lg bg-white shadow-[0_2px_8px_rgba(0,0,0,0.26)] md:w-[40rem] md:left-[calc(50%_-_20rem)]
+         ${props.className || ''}`}
       style={props.style}
     >
       <header

@@ -6,7 +6,7 @@ import Card from "../../shared/components/UIElements/Card";
 
 const UserItem = (props) => {
   return (
-    <li className="w-[calc(45% - 2rem)] m-4 min-w-[17.5rem] group">
+    <li className="w-[calc(45%_-_2rem)] m-4 min-w-[17.5rem] group">
       <Card className="p-0">
         <Link
           to={`/${props.id}/places`}
