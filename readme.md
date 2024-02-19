@@ -12,10 +12,9 @@ All the components in this React app are function components rather than class c
 
 # Branch specification
 - main branch:
-Uses tranditional CSS, and react router v5.
+uses tranditional CSS, and react router v5.
 
-- latest branch (default branch): latest version of the app
-Uses Tailwind CSS, and react router v6, and includes some other minor changes (such as provide fallback images ). Future changes will also be made to this branch. 
+- latest branch (default branch): latest version of the app. It uses Tailwind CSS, and react router v6, and includes some other minor changes (such as provide fallback images ). Future changes will also be made to this branch. 
 
 # Additional notes
 P.S. The image uploads work normally when the backend is hosted locally, in which case images are be stored on the local machine. However, in production, the backend is hosted on the Render platform, which doesn't provide free disk storage. Therefore, images uploaded by users cannot be stored on backend or be retrieved later. To temporarily deal with this problem, I statically provide a fallback place image and user avatar image on frontend.
