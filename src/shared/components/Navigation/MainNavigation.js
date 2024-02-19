@@ -38,7 +38,10 @@ const MainNavigation = (props) => {
           <span className={spanInBurgerButton} />
         </button>
         <h1 className="text-white">
-          <Link to="/" className="text-2xl font-semibold text-white no-underline">
+          <Link
+            to="/"
+            className="text-2xl font-semibold text-white no-underline"
+          >
             ExplorePlaces
           </Link>
         </h1>
