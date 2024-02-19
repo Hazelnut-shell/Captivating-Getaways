@@ -1,14 +1,13 @@
 import React from 'react';
 
-import './Avatar.css';
-
 const Avatar = props => {
   return (
-    <div className={`avatar ${props.className}`} style={props.style}>
+    <div className="w-full h-full flex justify-center items-center">
       <img
         src={props.image}
         alt={props.alt}
-        style={{ width: props.width, height: props.width }}
+        // style={{ width: props.width, height: props.width }}
+        className='block w-full h-full object-cover rounded-[50%]'
       />
     </div>
   );

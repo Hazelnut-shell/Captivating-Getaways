@@ -1,16 +1,61 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  input {
+    @apply block w-full border border-solid border-[#ccc] bg-[#f8f8f8] px-1 py-[0.15rem] transition-all duration-300 focus:outline-none focus:bg-[#ebebeb] focus:border-[#510077]; 
+  }
+
+  textarea {
+    @apply block w-full border border-solid border-[#ccc] bg-[#f8f8f8] px-1 py-[0.15rem] transition-all duration-300 focus:outline-none focus:bg-[#ebebeb] focus:border-[#510077]; 
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  font-family: 'Open Sans', sans-serif;
+  margin: 0;
 }
 
 body {
-  margin: 0;
   background: #4d4d4d;
+}
+
+/* classes for CSSTransition */
+.modal-enter {
+  transform: translateY(-10rem);
+  opacity: 0;
+}
+
+.modal-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 200ms;
+}
+
+.modal-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-exit-active {
+  transform: translateY(-10rem);
+  opacity: 0;
+  transition: all 200ms;
 }
 
 .slide-in-left-enter {
@@ -32,11 +77,4 @@ body {
   transform: translateX(-100%);
   opacity: 0;
   transition: all 200ms;
-}
-
-.center {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

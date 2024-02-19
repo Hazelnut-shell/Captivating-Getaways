@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 
-import './Map.css';
-
 const Map = props => {
   const mapRef = useRef();
   
@@ -19,7 +17,7 @@ const Map = props => {
   return (
     <div
       ref={mapRef}
-      className={`map ${props.className}`}
+      className={`w-full h-full ${props.className}`}
       style={props.style}
     ></div>
   );

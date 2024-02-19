@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
-import Button from '../../shared/components/FormElements/Button';
+import Button from '../../shared/components/UIElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
@@ -13,7 +13,7 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
-import './PlaceForm.css';
+import PlaceForm from '../components/PlaceForm';
 
 const NewPlace = () => {
   const auth = useContext(AuthContext);
@@ -40,7 +40,7 @@ const NewPlace = () => {
     false
   );
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const placeSubmitHandler = async event => {
     event.preventDefault();
@@ -55,7 +55,7 @@ const NewPlace = () => {
         Authorization: 'Bearer ' + auth.token
       });
 
-      history.push('/');  // redirect
+      navigate('/');  // redirect
 
     } catch (err) {}
   };
@@ -63,7 +63,7 @@ const NewPlace = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={placeSubmitHandler}>
+      <PlaceForm onSubmitHandler={placeSubmitHandler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"
@@ -100,7 +100,7 @@ const NewPlace = () => {
         <Button type="submit" disabled={!formState.isValid}>
           ADD PLACE
         </Button>
-      </form>
+      </PlaceForm>
     </React.Fragment>
   );
 };

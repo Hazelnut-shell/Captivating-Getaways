@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
-import Button from '../../shared/components/FormElements/Button';
+import Button from '../../shared/components/UIElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
 import Map from '../../shared/components/UIElements/Map';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import './PlaceItem.css';
 
 const PlaceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -50,11 +49,11 @@ const PlaceItem = props => {
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
-        contentClass="place-item__modal-content"
-        footerClass="place-item__modal-actions"
+        contentClass="p-0"
+        footerClass="text-right"
         footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
       >
-        <div className="map-container">
+        <div className="w-full h-60">
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
@@ -62,7 +61,7 @@ const PlaceItem = props => {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="place-item__modal-actions"
+        footerClass="text-right"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>
@@ -79,21 +78,22 @@ const PlaceItem = props => {
           can't be undone thereafter.
         </p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
+      <li className="my-4 mx-0">
+        <Card className="p-0">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image">
+          <div className="w-full h-48 mr-6 md:h-80">
             <img
               src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
               alt={props.title}
+              className='object-cover w-full h-full'
             />
           </div>
-          <div className="place-item__info">
-            <h2>{props.title}</h2>
-            <h3>{props.address}</h3>
-            <p>{props.description}</p>
+          <div className="p-4 text-center">
+            <h2 className='mb-2'>{props.title}</h2>
+            <h3 className='mb-2'>{props.address}</h3>
+            <p className='mb-2'>{props.description}</p>
           </div>
-          <div className="place-item__actions">
+          <div className="p-4 text-center border-t-[#ccc] border-t border-solid">
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-import Button from './Button';
-import './ImageUpload.css';
+import Button from '../UIElements/Button';
 
 const ImageUpload = props => {
   const [file, setFile] = useState();
@@ -53,7 +52,7 @@ const ImageUpload = props => {
   };
 
   return (
-    <div className="form-control">
+    <div className="mx-0 my-4">
       <input
         id={props.id}
         ref={filePickerRef}
@@ -62,9 +61,9 @@ const ImageUpload = props => {
         accept=".jpg,.png,.jpeg"
         onChange={pickedHandler}
       />
-      <div className={`image-upload ${props.center && 'center'}`}>
-        <div className="image-upload__preview">
-          {previewUrl && <img src={previewUrl} alt="Preview" />}
+      <div className={`${props.center && "center flex-col"}`}>
+        <div className="flex justify-center items-center mb-4 text-center w-52 h-52 border border-solid border-[#ccc]">
+          {previewUrl && <img src={previewUrl} alt="Preview" className='object-cover h-full w-full' />}
           {!previewUrl && <p>Please pick an image.</p>}
         </div>
         <Button type="button" onClick={pickImageHandler}>

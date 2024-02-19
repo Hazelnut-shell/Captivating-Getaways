@@ -1,28 +1,27 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch
-} from 'react-router-dom';
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 // import Users from './user/pages/Users';
 // import NewPlace from './places/pages/NewPlace';
 // import UserPlaces from './places/pages/UserPlaces';
 // import UpdatePlace from './places/pages/UpdatePlace';
 // import Auth from './user/pages/Auth';
-import MainNavigation from './shared/components/Navigation/MainNavigation';
-import { AuthContext } from './shared/context/auth-context';
-import { useAuth } from './shared/hooks/auth-hook';
-import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
+import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import { AuthContext } from "./shared/context/auth-context";
+import { useAuth } from "./shared/hooks/auth-hook";
+import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 
 // code splitting
-const Users = React.lazy(() => import('./user/pages/Users'));
-const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
-const UserPlaces = React.lazy(() => import('./places/pages/UserPlaces'));
-const UpdatePlace = React.lazy(() => import('./places/pages/UpdatePlace'));
-const Auth = React.lazy(() => import('./user/pages/Auth'));
-
+const Users = React.lazy(() => import("./user/pages/Users"));
+const NewPlace = React.lazy(() => import("./places/pages/NewPlace"));
+const UserPlaces = React.lazy(() => import("./places/pages/UserPlaces"));
+const UpdatePlace = React.lazy(() => import("./places/pages/UpdatePlace"));
+const Auth = React.lazy(() => import("./user/pages/Auth"));
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -31,36 +30,22 @@ const App = () => {
 
   if (token) {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
-        </Route>
-        <Route path="/places/new" exact>
-          <NewPlace />
-        </Route>
-        <Route path="/places/:placeId">
-          <UpdatePlace />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Users />} />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/places/new" element={<NewPlace />} />
+        <Route path="/places/:placeId" element={<UpdatePlace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     );
   } else {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/:userId/places" exact>
-          <UserPlaces />
-        </Route>
-        <Route path="/auth">
-          <Auth />
-        </Route>
-        <Redirect to="/auth" />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Users />} />
+        <Route path="/:userId/places" element={<UserPlaces />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<Navigate to="/auth" replace />} />
+      </Routes>
     );
   }
 
@@ -71,14 +56,20 @@ const App = () => {
         token: token,
         userId: userId,
         login: login,
-        logout: logout
+        logout: logout,
       }}
     >
       <Router>
         <MainNavigation />
-        <main>
+        <main className="mt-20">
           {/* code splitting */}
-          <Suspense fallback={<div className="center"><LoadingSpinner /></div>}>
+          <Suspense
+            fallback={
+              <div className="center text-center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
             {routes}
           </Suspense>
         </main>

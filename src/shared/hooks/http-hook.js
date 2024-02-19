@@ -34,12 +34,15 @@ export const useHttpClient = () => {
           throw new Error(responseData.message);
         }
 
-        setIsLoading(false);
         return responseData;
       } catch (err) {  // non-200 status code, or error during fetching 
-        setError(err.message);
+        console.log("err:" + err.message);
+        if(err.message !== "The user aborted a request.") {
+          setError(err.message);
+          throw err;
+        }
+      } finally {
         setIsLoading(false);
-        throw err;
       }
     },
     []

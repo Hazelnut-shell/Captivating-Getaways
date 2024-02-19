@@ -1,20 +1,19 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from "react";
 
-import { validate } from '../../util/validators';
-import './Input.css';
+import { validate } from "../../util/validators";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
-    case 'CHANGE':
+    case "CHANGE":
       return {
         ...state,
         value: action.val,
-        isValid: validate(action.val, action.validators)
+        isValid: validate(action.val, action.validators),
       };
-    case 'TOUCH': {
+    case "TOUCH": {
       return {
         ...state,
-        isTouched: true
+        isTouched: true,
       };
     }
     default:
@@ -22,11 +21,11 @@ const inputReducer = (state, action) => {
   }
 };
 
-const Input = props => {
+const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.initialValue || '',
+    value: props.initialValue || "",
     isTouched: false,
-    isValid: props.initialValid || false
+    isValid: props.initialValid || false,
   });
 
   const { id, onInput } = props;
@@ -36,22 +35,24 @@ const Input = props => {
     onInput(id, value, isValid);
   }, [id, value, isValid, onInput]);
 
-  const changeHandler = event => {
+  const changeHandler = (event) => {
     dispatch({
-      type: 'CHANGE',
+      type: "CHANGE",
       val: event.target.value,
-      validators: props.validators
+      validators: props.validators,
     });
   };
 
   const touchHandler = () => {
     dispatch({
-      type: 'TOUCH'
+      type: "TOUCH",
     });
   };
 
+  const formControlInvalid = !inputState.isValid && inputState.isTouched;
+
   const element =
-    props.element === 'input' ? (
+    props.element === "input" ? (
       <input
         id={props.id}
         type={props.type}
@@ -59,6 +60,7 @@ const Input = props => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
+        className={`${formControlInvalid && "border-red-500 bg-[#ffd1d1]"}`}
       />
     ) : (
       <textarea
@@ -67,18 +69,17 @@ const Input = props => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
+        className={`${formControlInvalid && "border-red-500 bg-[#ffd1d1]"}`}
       />
     );
 
   return (
-    <div
-      className={`form-control ${!inputState.isValid &&
-        inputState.isTouched &&
-        'form-control--invalid'}`}
-    >
-      <label htmlFor={props.id}>{props.label}</label>
+    <div className={`my-4 mx-0`}>
+      <label htmlFor={props.id} className={`block font-bold mb-2 ${formControlInvalid && "text-red-500"}`}>
+        {props.label}
+      </label>
       {element}
-      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+      {formControlInvalid && <p className="text-red-500">{props.errorText}</p>}
     </div>
   );
 };
