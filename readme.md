@@ -1,7 +1,7 @@
 # Overview and deployment
 This is the frontend for the Captivating Getaways app, which is a React SPA with Tailwind CSS. The app is designed for users to share fun, captivating and all places which they think are worth visiting. 
 
-The frontend is statically hosted on Firebase. You can visit it on https://capitivating-getaways.web.app/. Since the hosting services used by this app are basically free tier, the backend on Render will sleep after 15 minutes of inactivity. So <ins> please expect to wait a few seconds</ins> for the backend to be back up and running when you first access the app : )
+The frontend is statically hosted on Firebase. You can visit it on https://capitivating-getaways.web.app/. Since the hosting services used by this app are basically free tier, the backend on Render will sleep after 15 minutes of inactivity. So <ins> please expect to wait tens of seconds</ins> for the backend to be back up and running when you first access the app : )
 
 # App features and implementation
 The app supports CRUD operations on user and place data. It also supports user authentication with JWT, authorization, and file uploads. It uses Google API to display the location of a place on Google Maps.
